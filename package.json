@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
+    "vercel-build": "echo skipping build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
