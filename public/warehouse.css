@@ -1,0 +1,1117 @@
+:root {
+    --bg-primary: #e0e7ff;
+    --bg-secondary: #a5b4fc;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --surface-primary: #fff;
+    --surface-secondary: #f1f5f9;
+    --surface-hover: #e2e8f0;
+    --border-primary: #a5b4fc;
+    --border-secondary: #e0e7ff;
+    --accent-primary: #6366f1;
+    --accent-secondary: #60a5fa;
+    --success-color: #059669;
+    --shadow-primary: rgba(30,64,175,0.08);
+    --shadow-secondary: rgba(31,38,135,0.17);
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --surface-primary: #1e293b;
+    --surface-secondary: #334155;
+    --surface-hover: #475569;
+    --border-primary: #475569;
+    --border-secondary: #334155;
+    --accent-primary: #818cf8;
+    --accent-secondary: #93c5fd;
+    --success-color: #10b981;
+    --shadow-primary: rgba(0,0,0,0.3);
+    --shadow-secondary: rgba(0,0,0,0.5);
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+header {
+    background: rgba(30, 64, 175, 0.9);
+    color: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 var(--shadow-secondary);
+    border: 1px solid var(--border-secondary);
+    margin: 32px auto 24px auto;
+    padding: 32px 0;
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+main {
+    width: 100vw;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+}
+
+#actions_block {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface-secondary);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px 0 var(--shadow-primary);
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    gap: 12px;
+    transition: all 0.3s ease;
+}
+
+.search_group {
+    display: flex;
+    align-items: center;
+    flex: 1 1 0;
+    gap: 8px;
+    min-width: 0;
+}
+
+.search_input_wrapper {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    background: var(--surface-primary);
+    border: 2px solid var(--border-primary);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.search_input_wrapper:focus-within {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.input_icon {
+    padding: 12px 16px;
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+#search {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 12px 16px;
+    font-size: 14px;
+    background: transparent;
+    color: var(--text-primary);
+    min-width: 0;
+}
+
+#search:focus {
+    outline: none;
+}
+
+#search_find {
+    /* Вернуть прежние стили, убрать shine-анимацию */
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#search_find:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+#back_to_main {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+}
+
+#back_to_main:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+#warehouse_block {
+    width: 100%;
+    max-width: 1200px;
+    background: var(--surface-secondary);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px 0 var(--shadow-primary);
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+#warehouse_block h2 {
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0 0 24px 0;
+    text-align: center;
+}
+
+.warehouse_table_container {
+    overflow-x: auto;
+    border-radius: 8px;
+    background: var(--surface-primary);
+}
+
+.warehouse_table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.warehouse_table thead {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+}
+
+.warehouse_table th {
+    color: white;
+    padding: 16px 12px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    border-bottom: 2px solid var(--border-primary);
+}
+
+.warehouse_table th:first-child {
+    border-radius: 8px 0 0 0;
+}
+
+.warehouse_table th:last-child {
+    border-radius: 0 8px 0 0;
+}
+
+.warehouse_table tbody tr {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.warehouse_table tbody tr:hover {
+    background: var(--surface-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.warehouse_table tbody tr:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.warehouse_table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.warehouse_table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-secondary);
+    color: var(--text-primary);
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.warehouse_table td:first-child {
+    font-weight: 600;
+    color: var(--accent-primary);
+}
+
+.warehouse_table .warehouse_image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid var(--border-primary);
+}
+
+.warehouse_table .warehouse_name {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.warehouse_table .warehouse_price {
+    font-weight: 600;
+    color: var(--success-color);
+}
+
+.warehouse_table .warehouse_quantity {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.warehouse_table .warehouse_gender {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.warehouse_table .warehouse_type {
+    font-weight: 500;
+    color: var(--accent-primary);
+}
+
+.warehouse_table .warehouse_reason {
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.warehouse_table .warehouse_date {
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+footer {
+    background: rgba(30, 64, 175, 0.9);
+    color: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 var(--shadow-secondary);
+    border: 1px solid var(--border-secondary);
+    margin: 24px auto 32px auto;
+    padding: 24px 0;
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.success_notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.success_notification.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.success_circle {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--success-color), #10b981);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
+    animation: successPulse 0.6s ease-out;
+}
+
+.success_checkmark {
+    color: #fff;
+    font-size: 3rem;
+    animation: checkmarkAppear 0.4s ease-out 0.2s both;
+}
+
+.success_checkmark::before {
+    content: '\f00c'; /* FontAwesome галочка */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+}
+
+@keyframes successPulse {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes checkmarkAppear {
+    0% {
+        transform: scale(0) rotate(-45deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.theme_toggle {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.theme_toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) scale(1.05);
+}
+
+/* Темная тема для таблицы склада */
+[data-theme="dark"] .warehouse_table td,
+[data-theme="dark"] .warehouse_table .warehouse_name,
+[data-theme="dark"] .warehouse_table .warehouse_price,
+[data-theme="dark"] .warehouse_table .warehouse_quantity,
+[data-theme="dark"] .warehouse_table .warehouse_gender,
+[data-theme="dark"] .warehouse_table .warehouse_type,
+[data-theme="dark"] .warehouse_table .warehouse_reason,
+[data-theme="dark"] .warehouse_table .warehouse_date,
+[data-theme="dark"] .warehouse_table td:first-child {
+    color: #fff !important;
+}
+
+[data-theme="dark"] .warehouse_table .warehouse_type {
+    color: #a5b4fc !important;
+}
+
+[data-theme="dark"] .warehouse_table .warehouse_price {
+    color: #4ade80 !important;
+}
+
+/* Модалка детального просмотра товара на складе */
+.warehouse_detail_modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10002;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s;
+}
+
+.warehouse_detail_modal.show {
+    display: flex;
+}
+
+.warehouse_detail_modal_content {
+    background: var(--surface-primary);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 var(--shadow-secondary);
+    width: 90%;
+    max-width: 1200px;
+    max-height: 90vh;
+    overflow: hidden;
+    animation: fadeInUp 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.warehouse_detail_header {
+    background: var(--surface-secondary);
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--border-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.warehouse_detail_header h2 {
+    color: var(--text-primary);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.close_modal_btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.close_modal_btn:hover {
+    background: var(--surface-hover);
+    color: var(--text-primary);
+}
+
+.warehouse_detail_body {
+    display: flex;
+    padding: 32px;
+    gap: 32px;
+    max-height: calc(90vh - 100px);
+    overflow-y: auto;
+}
+
+.warehouse_detail_left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-right: 40px;
+}
+
+.warehouse_detail_right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.warehouse_image_section h3,
+.warehouse_description_section h3,
+.warehouse_info_section h3,
+.warehouse_actions_section h3 {
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+}
+
+.warehouse_image_section {
+    width: 85%;
+}
+
+.warehouse_image_container {
+    width: 100%;
+    height: 300px;
+    border: 2px solid var(--border-primary);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface-secondary);
+}
+
+.warehouse_image_container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.warehouse_description_section {
+    width: 85%;
+}
+
+#warehouse_detail_description {
+    width: 100%;
+    height: 120px;
+    padding: 16px;
+    border: 2px solid var(--border-primary);
+    border-radius: 12px;
+    background: var(--surface-secondary);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#warehouse_detail_description:focus {
+    border-color: var(--accent-primary);
+}
+
+.info_field {
+    margin-bottom: 16px;
+}
+
+.info_field label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.info_field input {
+    width: 85%;
+    padding: 12px 16px;
+    border: 2px solid var(--border-primary);
+    border-radius: 8px;
+    background: var(--surface-secondary);
+    color: var(--text-primary);
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.info_field input:focus {
+    border-color: var(--accent-primary);
+}
+
+.action_buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 85%;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    text-decoration: none;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-success:disabled {
+    background: #6b7280;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-danger:disabled {
+    background: #6b7280;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Модалка возврата в продажу */
+.return_to_sale_modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10003;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s;
+}
+
+.return_to_sale_modal.show {
+    display: flex;
+}
+
+.return_to_sale_modal_content {
+    background: var(--surface-primary);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 var(--shadow-secondary);
+    width: 460px;
+    max-width: 90vw;
+    animation: fadeInUp 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.return_to_sale_header {
+    background: var(--surface-secondary);
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-primary);
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.return_to_sale_header h3 {
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.return_to_sale_body {
+    padding: 24px;
+}
+
+.return_field {
+    margin-bottom: 20px;
+}
+
+.return_field label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.return_field input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border-primary);
+    border-radius: 8px;
+    background: var(--surface-secondary);
+    color: var(--text-primary);
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.return_field input:focus {
+    border-color: var(--accent-primary);
+}
+
+.return_actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.return_actions .btn {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+}
+
+.return_actions .btn-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.return_actions .btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.return_actions .btn-secondary {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    color: white;
+}
+
+.return_actions .btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+}
+
+/* Модалка подтверждения удаления со склада */
+.delete_warehouse_confirm_modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10004;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s;
+}
+
+.delete_warehouse_confirm_modal.show {
+    display: flex;
+}
+
+.delete_warehouse_confirm_modal_content {
+    background: var(--surface-primary);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 var(--shadow-secondary);
+    width: 450px;
+    height: 400px;
+    max-width: 90vw;
+    animation: fadeInUp 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.delete_warehouse_confirm_header {
+    background: var(--surface-secondary);
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-primary);
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete_warehouse_confirm_header h3 {
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.delete_warehouse_confirm_body {
+    padding: 32px 24px 24px 24px;
+    text-align: center;
+}
+
+.delete_warehouse_confirm_icon {
+    margin-bottom: 20px;
+}
+
+.delete_warehouse_confirm_icon i {
+    font-size: 48px;
+    color: #ef4444;
+    animation: pulse 2s infinite;
+}
+
+.delete_warehouse_confirm_message h4 {
+    color: var(--text-primary);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+}
+
+.delete_warehouse_confirm_message p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+}
+
+.delete_warehouse_confirm_actions {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.delete_warehouse_confirm_actions .btn {
+    flex: 1;
+    max-width: 140px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+}
+
+.delete_warehouse_confirm_actions .btn-danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+
+.delete_warehouse_confirm_actions .btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.delete_warehouse_confirm_actions .btn-secondary {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    color: white;
+}
+
+.delete_warehouse_confirm_actions .btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 1300px) {
+    header, #actions_block, #warehouse_block, footer, main {
+        max-width: 95%;
+    }
+}
+
+@media (max-width: 700px) {
+    header, #actions_block, #warehouse_block, footer, main {
+        max-width: 98%;
+    }
+    
+    .search_group {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    #back_to_main {
+        width: 38px;
+        height: 38px;
+        font-size: 1.2rem;
+    }
+    
+    .warehouse_table {
+        font-size: 0.8rem;
+    }
+    
+    .warehouse_table th,
+    .warehouse_table td {
+        padding: 6px 4px;
+    }
+    
+    .warehouse_table .warehouse_image {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    #warehouse_block {
+        padding: 16px;
+    }
+    
+    #warehouse_block h2 {
+        font-size: 1.5rem;
+    }
+    
+    .warehouse_table_container {
+        overflow-x: auto;
+    }
+    
+    .warehouse_table {
+        min-width: 500px;
+    }
+    
+    .warehouse_table th,
+    .warehouse_table td {
+        padding: 6px 4px;
+        font-size: 11px;
+    }
+    
+    .warehouse_table .warehouse_image {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .success_circle {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .success_checkmark {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (max-width: 400px) {
+    header {
+        font-size: 1.8rem;
+        padding: 24px 0;
+    }
+    
+    #warehouse_block, #actions_block, footer {
+        padding: 12px;
+    }
+    
+    #warehouse_block h2 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 350px) {
+    header {
+        font-size: 1.6rem;
+        padding: 20px 0;
+    }
+    
+    #warehouse_block, #actions_block, footer {
+        padding: 8px;
+    }
+    
+    #warehouse_block h2 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Адаптивность для модалок склада */
+@media (max-width: 1000px) {
+    .warehouse_detail_body {
+        flex-direction: column;
+        padding: 24px;
+        gap: 24px;
+    }
+    
+    .warehouse_detail_modal_content {
+        width: 95%;
+        max-height: 95vh;
+    }
+}
+
+@media (max-width: 600px) {
+    .warehouse_detail_header {
+        padding: 16px 20px;
+    }
+    
+    .warehouse_detail_header h2 {
+        font-size: 20px;
+    }
+    
+    .warehouse_detail_body {
+        padding: 16px;
+        gap: 20px;
+    }
+    
+    .warehouse_image_container {
+        height: 200px;
+    }
+    
+    .action_buttons {
+        gap: 10px;
+    }
+    
+    .btn-success,
+    .btn-danger {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+    
+    .return_to_sale_modal_content,
+    .delete_warehouse_confirm_modal_content {
+        width: 95%;
+        max-width: 95vw;
+    }
+    
+    .return_to_sale_header,
+    .delete_warehouse_confirm_header {
+        padding: 16px 20px;
+    }
+    
+    .return_to_sale_header h3,
+    .delete_warehouse_confirm_header h3 {
+        font-size: 16px;
+    }
+    
+    .return_to_sale_body,
+    .delete_warehouse_confirm_body {
+        padding: 20px;
+    }
+    
+    .return_actions,
+    .delete_warehouse_confirm_actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .return_actions .btn,
+    .delete_warehouse_confirm_actions .btn {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 400px) {
+    .warehouse_detail_modal_content,
+    .return_to_sale_modal_content,
+    .delete_warehouse_confirm_modal_content {
+        width: 98%;
+        max-width: 98vw;
+    }
+    
+    .warehouse_detail_header,
+    .return_to_sale_header,
+    .delete_warehouse_confirm_header {
+        padding: 12px 16px;
+    }
+    
+    .warehouse_detail_body,
+    .return_to_sale_body,
+    .delete_warehouse_confirm_body {
+        padding: 12px;
+        gap: 16px;
+    }
+    
+    .warehouse_image_container {
+        height: 150px;
+    }
+}

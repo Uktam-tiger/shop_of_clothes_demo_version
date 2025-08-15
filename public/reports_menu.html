@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Отчёты</title>
+    <script src="./storage_guard.js"></script>
+    <link rel="stylesheet" href="./reports.css">
+    <link rel="icon" type="image" href="./images/shop_title_icon.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        img {
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header id="header" style="position: relative;">
+        <button id="refresh_page_btn" title="Обновить страницу" style="position: absolute; left: 25px; top: 35px; width: 44px; height: 44px; border-radius: 50%; background: #2563eb; border: none; box-shadow: 0 2px 8px rgba(37,99,235,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: background 0.2s;">
+            <i class="fa fa-rotate-right" style="color: #fff; font-size: 1.5rem;"></i>
+        </button>
+        <i class="fa fa-chart-bar fa-lg" style="margin-right: 10px;"></i>Отчёты
+        <button id="theme_toggle" class="theme_toggle" title="Переключить тему">
+            <i class="fa fa-sun"></i>
+        </button>
+    </header>
+    <main id="main">
+        <div id="actions_block">
+            <div class="search_group">
+                <span class="input_icon"><i class="fa fa-search"></i></span>
+                <div class="search_input_wrapper">
+                    <input type="search" id="search" placeholder="Найти отчёт...">
+                    <button id="search_find" title="Поиск"><i class="fa fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+            <div class="export_buttons">
+                <button id="export_pdf_btn" title="Экспорт отчёта">
+                    <i class="fa fa-file-text"></i>
+                    <span>Экспорт отчёта</span>
+                </button>
+            </div>
+            <button id="back_to_main" title="Вернуться в главное меню">
+                <i class="fa fa-arrow-left"></i>
+            </button>
+        </div>
+        <div id="reports_block">
+            <h2>Информация об отчётах</h2>
+            <div class="reports_table_container">
+                <table class="reports_table">
+                    <thead>
+                        <tr>
+                            <th>Номер</th>
+                            <th>Изображение</th>
+                            <th>Наименование</th>
+                            <th>Цена продукта</th>
+                            <th>Количество</th>
+                            <th>Пол</th>
+                            <th>Тип</th>
+                            <th>Действие</th>
+                            <th>Дата</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Здесь будут отображаться данные отчётов -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <footer id="footer">
+        &copy; 2025 Магазин. Все права защищены.
+    </footer>
+
+    <div id="success_notification" class="success_notification">
+        <div class="success_circle">
+            <div class="success_checkmark"></div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для выбора периода отчёта -->
+    <div id="report_period_modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fa fa-calendar-alt"></i> Выбор периода отчёта</h3>
+                <button class="modal-close" onclick="closeReportModal()">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="date-inputs">
+                    <div class="date-group">
+                        <label for="start_date">Дата начала:</label>
+                        <input type="date" id="start_date" required>
+                    </div>
+                    <div class="date-group">
+                        <label for="end_date">Дата окончания:</label>
+                        <input type="date" id="end_date" required>
+                    </div>
+                </div>
+                <div class="period-presets">
+                    <button class="preset-btn" onclick="setPeriod('today')">Сегодня</button>
+                    <button class="preset-btn" onclick="setPeriod('yesterday')">Вчера</button>
+                    <button class="preset-btn" onclick="setPeriod('week')">Неделя</button>
+                    <button class="preset-btn" onclick="setPeriod('month')">Месяц</button>
+                    <button class="preset-btn" onclick="setPeriod('quarter')">Квартал</button>
+                    <button class="preset-btn" onclick="setPeriod('year')">Год</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeReportModal()">
+                    <i class="fa fa-times"></i> Отменить
+                </button>
+                <button class="btn-generate" onclick="generatePeriodReport()">
+                    <i class="fa fa-file-text"></i> Сформировать
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-font@1.0.0/dist/fonts/arial-unicode-ms.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-font@1.0.0/dist/fonts/roboto.js"></script>
+    <script src="reports.js"></script>
+</body>
+</html>

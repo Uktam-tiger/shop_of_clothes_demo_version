@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добро пожаловать в магазин!</title>
+    <script src="./storage_guard.js"></script>
+    <link rel="stylesheet" href="./auth_page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image" href="./images/shop_title_icon.png"/>
+    <style>
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        img {
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+    Добро пожаловать уважаемый продавец!
+</header>
+
+<!-- Декоративные силуэты -->
+<div class="decorative-silhouette decorative-left">
+    <img src="./images/girl_shopping.png" alt="Женская фигура" class="silhouette-image">
+</div>
+<div class="decorative-silhouette decorative-right">
+    <img src="./images/man_shopping.png" alt="Мужская фигура" class="silhouette-image">
+</div>
+
+<main id="main">
+    <div class="main_content" id="auth_block">
+        <h1>Для продолжения, пожалуйста авторизуйтесь:</h1>
+        <form action="#">
+            <div id="auth_container">
+                <div class="input_container">
+                    <div class="input_inner">
+                        <span class="input_icon"><i class="fa fa-user"></i></span>
+                        <input type="text" id="auth_login" maxlength="30" class="send_to_auth floating_input" required>
+                        <label for="auth_login" class="floating_label">Логин</label>
+                    </div>
+                </div>
+                <div class="input_container">
+                    <div class="input_inner">
+                        <span class="input_icon"><i class="fa fa-lock"></i></span>
+                        <input type="password" id="auth_password" maxlength="30" class="send_to_auth floating_input" required>
+                        <label for="auth_password" class="floating_label">Пароль</label>
+                        <div id="show_hide_password_button" style="cursor: pointer;">
+                            <img src="./images/eye_image.png" alt="показать/скрыть пароль" id="eye_icon">
+                        </div>
+                    </div>
+                </div>
+                <div id="auth_error" class="auth_error"></div>
+                <div class="input_container">
+                    <div style="height: 60px; width: 100%;">
+                        <button id="check_auth_data" class="send_to_auth">
+                            Проверить и войти
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<footer id="footer">
+    <div style="color: lightblue;">Demo-версия магазина одежды</div>
+    <div>Логин для входа: admin369</div>
+    <div>Пароль для входа: admin369</div>
+</footer>
+<script src="auth_page.js"></script>
+</body>
+</html>

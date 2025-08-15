@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главное меню - Тест</title>
+    <script src="./storage_guard.js"></script>
+    <link rel="stylesheet" href="./main_page.css">
+    <link rel="icon" type="image" href="./images/shop_title_icon.png"/>
+    <link rel="stylesheet" href="https://unpkg.com/cropperjs@1.5.13/dist/cropper.min.css" />
+    <script src="https://unpkg.com/cropperjs@1.5.13/dist/cropper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        img {
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <i class="fa fa-store fa-lg" style="margin-right: 10px;"></i>Главное меню - ТЕСТ
+        <button id="theme_toggle" class="theme_toggle" title="Переключить тему">
+            <i class="fa fa-sun"></i>
+        </button>
+    </header>
+    <main id="main">
+        <div id="actions_block">
+            <div class="search_group">
+                <span class="input_icon"><i class="fa fa-search"></i></span>
+                <div class="search_input_wrapper">
+                    <input type="search" id="search" placeholder="Найти продукцию...">
+                    <button id="search_find" title="Поиск"><i class="fa fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+            <div class="action_buttons_group">
+                <button id="warehouse_btn" title="Перейти в склад" class="warehouse_btn">
+                    <i class="fa fa-warehouse"></i>
+                </button>
+                <button id="reports_btn" title="Перейти в отчёты" class="reports_btn">
+                    <i class="fa fa-chart-bar"></i>
+                </button>
+                <button id="add_product" title="Добавить продукцию"><i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+        <div id="products_block">
+            <h2>Продукция магазина</h2>
+            <div class="products_table_container">
+                <table class="products_table">
+                    <thead>
+                        <tr>
+                            <th>Номер</th>
+                            <th>Изображение</th>
+                            <th>Наименование</th>
+                            <th>Цена продукта</th>
+                            <th>Количество</th>
+                            <th>Пол</th>
+                            <th>Тип</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Здесь будут отображаться товары -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <footer id="footer">
+        &copy; 2025 Магазин. Все права защищены.
+    </footer>
+    <div id="modal_window">
+        <div id="modal_window_add_product">
+            <button id="close_modal_window">&times;</button>
+            <h1>Добавить продукцию</h1>
+            <p style="text-align: center; color: #666;">Модальное окно работает! 🎉</p>
+        </div>
+    </div>
+
+    <!-- Только простой скрипт без reports.js -->
+    <script src="main_page_simple.js"></script>
+</body>
+</html> 

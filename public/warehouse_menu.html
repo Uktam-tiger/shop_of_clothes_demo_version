@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Склад</title>
+    <script src="./storage_guard.js"></script>
+    <link rel="stylesheet" href="./warehouse.css">
+    <link rel="icon" type="image" href="./images/shop_title_icon.png"/>
+    <link rel="stylesheet" href="https://unpkg.com/cropperjs@1.5.13/dist/cropper.min.css" />
+    <script src="https://unpkg.com/cropperjs@1.5.13/dist/cropper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        img {
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header id="header" style="position: relative;">
+        <button id="refresh_page_btn" title="Обновить страницу" style="position: absolute; left: 25px; top: 35px; width: 44px; height: 44px; border-radius: 50%; background: #2563eb; border: none; box-shadow: 0 2px 8px rgba(37,99,235,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: background 0.2s;">
+            <i class="fa fa-rotate-right" style="color: #fff; font-size: 1.5rem;"></i>
+        </button>
+        <i class="fa fa-warehouse fa-lg" style="margin-right: 10px;"></i>Склад
+        <button id="theme_toggle" class="theme_toggle" title="Переключить тему">
+            <i class="fa fa-sun"></i>
+        </button>
+    </header>
+    <main id="main">
+        <div id="actions_block">
+            <div class="search_group">
+                <span class="input_icon"><i class="fa fa-search"></i></span>
+                <div class="search_input_wrapper">
+                    <input type="search" id="search" placeholder="Найти товар на складе...">
+                    <button id="search_find" title="Поиск"><i class="fa fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+            <button id="back_to_main" title="Вернуться в главное меню">
+                <i class="fa fa-arrow-left"></i>
+            </button>
+        </div>
+        <div id="warehouse_block">
+            <h2>Товары на складе</h2>
+            <div class="warehouse_table_container">
+                <table class="warehouse_table">
+                    <thead>
+                        <tr>
+                            <th>Номер</th>
+                            <th>Изображение</th>
+                            <th>Наименование</th>
+                            <th>Цена продукта</th>
+                            <th>Количество</th>
+                            <th>Пол</th>
+                            <th>Тип</th>
+                            <th>Причина резервирования</th>
+                            <th>Дата поступления</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Здесь будут отображаться товары со склада -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <footer id="footer">
+        <div style="color: white;">Demo-версия магазина одежды</div>
+    </footer>
+
+    <!-- Модалка детального просмотра товара на складе -->
+    <div id="warehouse_detail_modal" class="warehouse_detail_modal">
+        <div class="warehouse_detail_modal_content">
+            <div class="warehouse_detail_header">
+                <h2>Детали товара на складе</h2>
+                <button id="close_warehouse_detail_modal" class="close_modal_btn">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="warehouse_detail_body">
+                <div class="warehouse_detail_left">
+                    <div class="warehouse_image_section">
+                        <h3>Изображение товара</h3>
+                        <div class="warehouse_image_container">
+                            <img id="warehouse_detail_image" src="" alt="Изображение товара">
+                        </div>
+                    </div>
+                    
+                    <div class="warehouse_description_section">
+                        <h3>Краткое описание товара</h3>
+                        <textarea id="warehouse_detail_description" readonly></textarea>
+                    </div>
+                </div>
+                
+                <div class="warehouse_detail_right">
+                    <div class="warehouse_info_section">
+                        <h3>Информация о товаре</h3>
+                        <div class="info_field">
+                            <label>Наименование товара:</label>
+                            <input type="text" id="warehouse_detail_name" readonly>
+                        </div>
+                        <div class="info_field">
+                            <label>Цена товара:</label>
+                            <input type="text" id="warehouse_detail_price" readonly>
+                        </div>
+                        <div class="info_field">
+                            <label>Количество:</label>
+                            <input type="text" id="warehouse_detail_quantity" readonly>
+                        </div>
+                        <div class="info_field">
+                            <label>Пол:</label>
+                            <input type="text" id="warehouse_detail_gender" readonly>
+                        </div>
+                        <div class="info_field">
+                            <label>Тип:</label>
+                            <input type="text" id="warehouse_detail_type" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="warehouse_actions_section">
+                        <h3>Действия:</h3>
+                        <div class="action_buttons">
+                            <button id="return_to_sale_btn" class="btn btn-success">
+                                <i class="fa fa-store"></i> Вернуть в продажу
+                            </button>
+                            <button id="delete_warehouse_item_btn" class="btn btn-danger">
+                                <i class="fa fa-trash"></i> Удалить со склада
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка подтверждения возврата в продажу -->
+    <div id="return_to_sale_modal" class="return_to_sale_modal">
+        <div class="return_to_sale_modal_content">
+            <div class="return_to_sale_header">
+                <h3>Возврат в продажу</h3>
+                <button id="close_return_to_sale_modal" class="close_modal_btn">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="return_to_sale_body">
+                <div class="return_field">
+                    <label for="return_quantity">Количество для возврата в продажу:</label>
+                    <input type="number" id="return_quantity" min="1" value="1">
+                </div>
+                
+                <div class="return_actions">
+                    <button id="confirm_return_btn" class="btn btn-success">
+                        <i class="fa fa-check"></i> Вернуть в продажу
+                    </button>
+                    <button id="cancel_return_btn" class="btn btn-secondary">
+                        <i class="fa fa-times"></i> Отменить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка подтверждения удаления со склада -->
+    <div id="delete_warehouse_confirm_modal" class="delete_warehouse_confirm_modal">
+        <div class="delete_warehouse_confirm_modal_content">
+            <div class="delete_warehouse_confirm_header">
+                <h3>Подтверждение удаления</h3>
+                <button id="close_delete_warehouse_confirm_modal" class="close_modal_btn">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="delete_warehouse_confirm_body">
+                <div class="delete_warehouse_confirm_icon">
+                    <i class="fa fa-exclamation-triangle"></i>
+                </div>
+                
+                <div class="delete_warehouse_confirm_message">
+                    <h4>Вы уверены, что хотите удалить этот товар со склада?</h4>
+                    <p>Это действие нельзя отменить. Товар будет удалён навсегда.</p>
+                </div>
+                
+                <div class="delete_warehouse_quantity_field">
+                    <label for="delete_warehouse_quantity">Количество для удаления:</label>
+                    <input type="number" id="delete_warehouse_quantity" min="1" value="1">
+                    <span class="available_quantity">Доступно: <span id="available_quantity_display">0</span></span>
+                </div>
+                
+                <div class="delete_warehouse_confirm_actions">
+                    <button id="confirm_delete_warehouse_btn" class="btn btn-danger">
+                        <i class="fa fa-trash"></i> Удалить
+                    </button>
+                    <button id="cancel_delete_warehouse_btn" class="btn btn-secondary">
+                        <i class="fa fa-times"></i> Отменить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="success_notification" class="success_notification">
+        <div class="success_circle">
+            <div class="success_checkmark"></div>
+        </div>
+    </div>
+
+    
+
+    <script src="warehouse.js"></script>
+</body>
+</html>

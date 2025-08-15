@@ -1,0 +1,416 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #e0e7ff 0%, #a5b4fc 100%);
+    overflow-x: hidden;
+}
+
+header {
+    background: rgba(30, 64, 175, 0.9);
+    color: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255,255,255,0.18);
+    margin: 32px auto 24px auto;
+    padding: 32px 0;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+main {
+    width: 100vw;
+    min-height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#auth_block {
+    background: rgba(255,255,255,0.95);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
+    border: 1px solid #e0e7ff;
+    padding: 36px 32px 32px 32px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#auth_block h1 {
+    color: #1e40af;
+    font-size: 1.3rem;
+    margin-bottom: 28px;
+    text-align: center;
+    font-weight: 600;
+    text-shadow: none;
+}
+
+#auth_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.input_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.input_container label {
+    font-size: 1rem;
+    color: #1e293b;
+    margin-bottom: 2px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.input_inner {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #f1f5f9;
+    border: 1.5px solid #a5b4fc;
+    border-radius: 8px;
+    padding: 0 12px;
+    height: 48px;
+    transition: border 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px 0 rgba(30,64,175,0.04);
+    position: relative;
+}
+
+.input_inner:focus-within {
+    border: 1.5px solid #6366f1;
+    box-shadow: 0 4px 16px 0 rgba(99,102,241,0.10);
+}
+
+.input_icon {
+    color: #6366f1;
+    font-size: 1.2rem;
+    margin-right: 10px;
+    min-width: 22px;
+    text-align: center;
+}
+
+.send_to_auth {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.1rem;
+    color: #1e293b;
+    width: 100%;
+    height: 100%;
+    padding: 0 4px;
+    font-family: inherit;
+    transition: color 0.2s;
+}
+
+.send_to_auth:focus {
+    color: #6366f1;
+}
+
+#check_auth_data {
+    width: 100%;
+    height: 48px;
+    background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px 0 rgba(99,102,241,0.10);
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s, transform 0.15s;
+}
+
+#check_auth_data:hover {
+    background: linear-gradient(90deg, #60a5fa 0%, #6366f1 100%);
+    transform: scale(1.03);
+}
+
+#eye_icon {
+    height: 22px;
+    width: 32px;
+    margin-left: 8px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+#show_hide_password_button:hover #eye_icon {
+    opacity: 1;
+}
+#stripe_of_eye {
+    display: none;
+}
+
+footer {
+    margin: 32px auto 0 auto;
+    background: rgba(30, 64, 175, 0.9);
+    color: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
+    border: 1px solid #e0e7ff;
+    width: 100%;
+    max-width: 480px;
+    min-height: 80px;
+    text-align: center;
+    padding: 18px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Анимация появления формы */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Плавающие label */
+.floating_input {
+    padding-top: 18px;
+    padding-bottom: 6px;
+}
+.floating_label {
+    position: absolute;
+    left: 38px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a5b4fc;
+    font-size: 1rem;
+    pointer-events: none;
+    background: transparent;
+    transition: 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    padding: 0 4px;
+}
+.floating_input:focus + .floating_label,
+.floating_input:not(:placeholder-shown):not([value=""]) + .floating_label {
+    top: 2px;
+    left: 34px;
+    font-size: 0.85rem;
+    color: #6366f1;
+    background: #f1f5f9;
+    border-radius: 4px;
+    padding: 0 4px;
+}
+
+/* Стили для ошибки */
+.auth_error {
+    color: #ef4444;
+    font-size: 0.98rem;
+    margin-top: 8px;
+    min-height: 22px;
+    text-align: center;
+    transition: opacity 0.2s;
+}
+
+/* Интерактивная иконка показа пароля */
+#show_hide_password_button {
+    display: flex;
+    align-items: center;
+    margin-left: 6px;
+    z-index: 2;
+}
+#show_hide_password_button.active #eye_icon {
+    filter: grayscale(0) brightness(1.5) sepia(1) hue-rotate(180deg);
+    opacity: 1;
+}
+
+/* Декоративные силуэты */
+.decorative-silhouette {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.decorative-left {
+    left: 8%;
+    animation: floatLeft 6s ease-in-out infinite;
+}
+
+.decorative-right {
+    right: 8%;
+    animation: floatRight 6s ease-in-out infinite;
+    top: 50%; /* Явно указываем позицию */
+    transform: translateY(-50%); /* Центрируем по вертикали */
+}
+
+.silhouette-image {
+    width: 400px; /* Увеличил с 300px до 400px */
+    height: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Специальный размер для мужского силуэта */
+.decorative-right .silhouette-image {
+    width: 320px; /* Мужчина меньше девушки */
+}
+
+.decorative-silhouette:hover .silhouette-image {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Анимации плавания */
+@keyframes floatLeft {
+    0%, 100% {
+        transform: translateY(-50%) translateX(0px);
+    }
+    50% {
+        transform: translateY(-50%) translateX(-10px);
+    }
+}
+
+@keyframes floatRight {
+    0%, 100% {
+        transform: translateY(-50%) translateX(0px);
+    }
+    50% {
+        transform: translateY(-50%) translateX(10px);
+    }
+}
+
+/* Адаптивность для декоративных элементов */
+@media (max-width: 1200px) {
+    .decorative-left {
+        left: 5%;
+    }
+    .decorative-right {
+        right: 5%;
+    }
+    .silhouette-image {
+        width: 350px; /* Увеличил с 250px до 350px */
+    }
+    .decorative-right .silhouette-image {
+        width: 280px; /* Мужчина меньше девушки */
+    }
+}
+
+@media (max-width: 900px) {
+    .decorative-left {
+        left: 3%;
+    }
+    .decorative-right {
+        right: 3%;
+    }
+    .silhouette-image {
+        width: 300px; /* Увеличил с 220px до 300px */
+        opacity: 0.7;
+    }
+    .decorative-right .silhouette-image {
+        width: 240px; /* Мужчина меньше девушки */
+    }
+}
+
+@media (max-width: 700px) {
+    .decorative-left {
+        left: 2%;
+    }
+    .decorative-right {
+        right: 2%;
+    }
+    .silhouette-image {
+        width: 250px; /* Увеличил с 180px до 250px */
+        opacity: 0.6;
+    }
+    .decorative-right .silhouette-image {
+        width: 200px; /* Мужчина меньше девушки */
+    }
+}
+
+@media (max-width: 500px) {
+    .decorative-silhouette {
+        display: none; /* Скрываем на очень маленьких экранах */
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    header {
+        font-size: 1.8rem;
+        padding: 24px 0;
+        margin: 24px auto 16px auto;
+    }
+    
+    #auth_block {
+        padding: 24px 16px;
+        margin: 16px auto;
+    }
+    
+    #auth_block h1 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+    
+    footer {
+        padding: 16px 0;
+        margin: 16px auto 24px auto;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 400px) {
+    header {
+        margin: 8px auto 6px auto;
+        padding: 10px 0 6px 0;
+    }
+    #auth_block {
+        margin: 0 auto 6px auto;
+        padding: 8px 2vw 6px 2vw;
+    }
+    footer {
+        margin: 6px auto 0 auto;
+        padding: 6px 0;
+    }
+    #auth_container {
+        gap: 8px;
+    }
+}
+
+@media (max-width: 350px) {
+    header {
+        margin: 4px auto 2px auto;
+        padding: 6px 0 3px 0;
+    }
+    #auth_block {
+        margin: 0 auto 2px auto;
+        padding: 4px 1vw 2px 1vw;
+    }
+    footer {
+        margin: 2px auto 0 auto;
+        padding: 3px 0;
+    }
+    #auth_container {
+        gap: 4px;
+    }
+}

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главное меню</title>
+    <script src="./storage_guard.js"></script>
+    <link rel="stylesheet" href="./main_page.css">
+    <link rel="icon" type="image" href="./images/shop_title_icon.png"/>
+    <link rel="stylesheet" href="https://unpkg.com/cropperjs@1.5.13/dist/cropper.min.css" />
+    <script src="https://unpkg.com/cropperjs@1.5.13/dist/cropper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        img {
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header id="header" style="position: relative;">
+        <button id="refresh_page_btn" title="Обновить страницу" style="position: absolute; left: 25px; top: 35px; width: 44px; height: 44px; border-radius: 50%; background: #2563eb; border: none; box-shadow: 0 2px 8px rgba(37,99,235,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: background 0.2s;">
+            <i class="fa fa-rotate-right" style="color: #fff; font-size: 1.5rem;"></i>
+        </button>
+        <!-- Временная кнопка для очистки localStorage (для тестирования) -->
+    <button id="clear_storage_btn" style="width: 44px; height: 44px; position: absolute; top: 35px; left: 85px; z-index: 10000; background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 12px 16px; border-radius: 50px; font-size: 14px; font-weight: 500; cursor: pointer; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); transition: all 0.2s;" title="Очистить все данные">
+        <i class="fa fa-trash" style="margin: 0 auto;"></i>
+    </button>
+        <i class="fa fa-store fa-lg" style="margin-right: 10px;"></i>Главное меню
+        <button id="theme_toggle" class="theme_toggle" title="Переключить тему">
+            <i class="fa fa-sun"></i>
+        </button>
+    </header>
+    <main id="main">
+        <div id="actions_block">
+            <div class="search_group">
+                <span class="input_icon"><i class="fa fa-search"></i></span>
+                <div class="search_input_wrapper">
+                    <input type="search" id="search" placeholder="Найти продукцию...">
+                    <button id="search_find" title="Поиск"><i class="fa fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+            <div class="action_buttons_group">
+                <button id="warehouse_btn" title="Перейти в склад" class="warehouse_btn">
+                    <i class="fa fa-warehouse"></i>
+                </button>
+                <button id="reports_btn" title="Перейти в отчёты" class="reports_btn">
+                    <i class="fa fa-chart-bar"></i>
+                </button>
+                <button id="add_product" title="Добавить продукцию"><i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+        <div id="products_block">
+            <h2>Продукция магазина</h2>
+            <div class="products_table_container">
+                <table class="products_table">
+                    <thead>
+                        <tr>
+                            <th>Номер</th>
+                            <th>Изображение</th>
+                            <th>Наименование</th>
+                            <th>Цена продукта</th>
+                            <th>Количество</th>
+                            <th>Пол</th>
+                            <th>Тип</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Здесь будут отображаться товары -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <footer id="footer">
+        <div style="color: white;">Demo-версия магазина одежды</div>
+    </footer>
+    <div id="modal_window">
+        <div id="modal_window_add_product">
+            <button id="close_modal_window">&times;</button>
+            <h1>Добавить продукцию</h1>
+            <form>
+                <div class="form_container">
+                    <div id="image_container_inner">
+                        <label for="standard_file_input" style="cursor: pointer;">
+                            <input type="file" id="standard_file_input" accept="image/png,image/jpeg,image/jpg,image/heic,image/heif" style="display: none;">
+                            <i class="fa fa-image fa-2x"></i>
+                        </label>
+                    </div>
+                    <div id="image_selected_inner"></div>
+                    <div id="name_of_product_inner">
+                        <label for="product_name">Название продукта:</label>
+                        <input type="text" id="product_name" placeholder="Введите название продукта...">
+                    </div>
+                </div>
+                <div class="form_container">
+                    <div class="input_group">
+                        <label for="product_price">Цена:</label>
+                        <input type="number" id="product_price" placeholder="0.00" min="0" step="0.01">
+                    </div>
+                    <div class="input_group">
+                        <label for="product_quantity">Количество:</label>
+                        <input type="number" id="product_quantity" placeholder="0" min="0">
+                    </div>
+                </div>
+                <div class="form_container">
+                    <div class="input_group">
+                        <label for="product_gender">Пол:</label>
+                        <select id="product_gender">
+                            <option value="">Выберите пол</option>
+                            <option value="male">Мужской</option>
+                            <option value="female">Женский</option>
+                        </select>
+                    </div>
+                    <div class="input_group">
+                        <label for="product_type">Тип продукта:</label>
+                        <select id="product_type">
+                            <option value="">Выберите тип</option>
+                            <option value="hats">Головные уборы</option>
+                            <option value="outerwear">Верхняя одежда</option>
+                            <option value="underwear">Нижняя одежда</option>
+                            <option value="lingerie">Нижнее бельё</option>
+                            <option value="footwear">Ножная одежда</option>
+                            <option value="shoes">Обувь</option>
+                            <option value="perfume">Духи</option>
+                            <option value="belts">Поясы</option>
+                            <option value="jewelry">Украшения</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form_container" style="border-bottom: none;">
+                    <div class="input_group full_width">
+                        <label for="product_description">Краткое описание товара:</label>
+                        <textarea id="product_description" placeholder="Введите описание товара..." rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="form_container form_actions" style="border-bottom: none; justify-content: flex-end; gap: 12px;">
+                    <button type="button" id="clear_product_form" class="btn btn-secondary">Очистить</button>
+                    <button type="submit" id="submit_product_form" class="btn btn-primary" disabled>Подтвердить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="cropper_modal" class="cropper_modal">
+        <div class="cropper_modal_content">
+            <img id="cropper_image" src="" alt="Обрезка изображения" style="max-width:100%; max-height:60vh; display:block; margin:0 auto;">
+            <div class="cropper_modal_actions">
+                <button id="cropper_cancel" class="btn btn-secondary">Отмена</button>
+                <button id="cropper_save" class="btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка детального просмотра продукта -->
+    <div id="product_detail_modal" class="product_detail_modal">
+        <div class="product_detail_modal_content">
+            <div class="product_detail_header">
+                <h2>Детали продукта</h2>
+                <button id="close_product_detail_modal" class="close_modal_btn">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="product_detail_body">
+                <div class="product_detail_left">
+                    <div class="product_image_section">
+                        <h3>Изображение продукции</h3>
+                        <div class="product_image_container">
+                            <img id="detail_product_image" src="" alt="Изображение продукта">
+                        </div>
+                    </div>
+                    
+                    <div class="product_description_section">
+                        <h3>Краткое описание продукции</h3>
+                        <textarea id="detail_product_description" readonly></textarea>
+                    </div>
+                </div>
+                
+                <div class="product_detail_right">
+                    <div class="product_info_section">
+                        <h3>Информация о продукции</h3>
+                        <div class="info_field">
+                            <label>Наименование продукции:</label>
+                            <input type="text" id="detail_product_name" readonly>
+                        </div>
+                        <div class="info_field">
+                            <label>Цена продукции:</label>
+                            <input type="text" id="detail_product_price" readonly>
+                        </div>
+                        <div class="info_field">
+                            <label>Количество:</label>
+                            <input type="text" id="detail_product_quantity" readonly>
+                        </div>
+                        <div class="info_field">
+                            <label>Пол:</label>
+                            <input type="text" id="detail_product_gender" readonly>
+                        </div>
+                        <div class="info_field">
+                            <label>Тип:</label>
+                            <input type="text" id="detail_product_type" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="product_actions_section">
+                        <h3>Действия:</h3>
+                        <div class="action_buttons">
+                            <button id="sell_product_btn" class="btn btn-success">
+                                <i class="fa fa-shopping-cart"></i> Продать
+                            </button>
+                            <button id="delete_product_btn" class="btn btn-danger">
+                                <i class="fa fa-trash"></i> Удалить
+                            </button>
+                            <button id="reserve_product_btn" class="btn btn-warning">
+                                <i class="fa fa-warehouse"></i> Переместить в склад (резервировать)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Маленькая модалка для продажи товара -->
+    <div id="sell_product_modal" class="sell_product_modal">
+        <div class="sell_product_modal_content">
+            <div class="sell_product_header">
+                <h3>Продажа товара</h3>
+                <button id="close_sell_product_modal" class="close_modal_btn">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sell_product_body">
+                <div class="sell_field">
+                    <label for="sell_quantity">Количество:</label>
+                    <input type="number" id="sell_quantity" min="1" value="1">
+                </div>
+                
+                <div class="sell_field">
+                    <label>Общая цена:</label>
+                    <input type="text" id="sell_total_price" readonly>
+                </div>
+                
+                <div class="sell_actions">
+                    <button id="confirm_sell_btn" class="btn btn-success">
+                        <i class="fa fa-check"></i> Продать
+                    </button>
+                    <button id="cancel_sell_btn" class="btn btn-secondary">
+                        <i class="fa fa-times"></i> Отменить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка подтверждения удаления товара -->
+    <div id="delete_confirm_modal" class="delete_confirm_modal">
+        <div class="delete_confirm_modal_content">
+            <div class="delete_confirm_header">
+                <h3>Подтверждение удаления</h3>
+                <button id="close_delete_confirm_modal" class="close_modal_btn">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="delete_confirm_body">
+                <div class="delete_confirm_icon">
+                    <i class="fa fa-exclamation-triangle"></i>
+                </div>
+                
+                <div class="delete_confirm_message">
+                    <h4>Вы уверены, что хотите удалить этот продукт?</h4>
+                    <p>Это действие нельзя отменить. Продукт будет удалён навсегда.</p>
+                </div>
+                
+                <div class="delete_confirm_actions">
+                    <button id="confirm_delete_btn" class="btn btn-danger">
+                        <i class="fa fa-trash"></i> Удалить
+                    </button>
+                    <button id="cancel_delete_btn" class="btn btn-secondary">
+                        <i class="fa fa-times"></i> Отменить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка резервирования товара -->
+    <div id="reserve_product_modal" class="reserve_product_modal">
+        <div class="reserve_product_modal_content">
+            <div class="reserve_product_header">
+                <h3>Резервирование товара</h3>
+                <button id="close_reserve_product_modal" class="close_modal_btn">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="reserve_product_body">
+                <div class="reserve_field">
+                    <label for="reserve_quantity">Количество для резервирования:</label>
+                    <input type="number" id="reserve_quantity" min="1" value="1">
+                </div>
+                
+                <div class="reserve_field">
+                    <label>Причина резервирования:</label>
+                    <select id="reserve_reason">
+                        <option value="">Выберите причину</option>
+                        <option value="repair">Ремонт</option>
+                        <option value="defect">Брак</option>
+                        <option value="storage">Перемещение на склад</option>
+                        <option value="inventory">Инвентаризация</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+                
+                <div class="reserve_actions">
+                    <button id="confirm_reserve_btn" class="btn btn-warning">
+                        <i class="fa fa-warehouse"></i> Зарезервировать
+                    </button>
+                    <button id="cancel_reserve_btn" class="btn btn-secondary">
+                        <i class="fa fa-times"></i> Отменить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="success_notification" class="success_notification">
+        <div class="success_circle">
+            <div class="success_checkmark"></div>
+        </div>
+    </div>
+
+    <script src="reports.js"></script>
+    <!-- Поддержка конвертации HEIC/HEIF в JPEG перед кропом -->
+    <script src="https://unpkg.com/heic2any/dist/heic2any.min.js"></script>
+    <script src="main_page.js"></script>
+</body>
+</html>
