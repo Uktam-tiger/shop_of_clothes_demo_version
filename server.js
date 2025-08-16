@@ -1,14 +1,13 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
