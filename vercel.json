@@ -1,12 +1,19 @@
 {
-	"version": 2,
-	"builds": [
-		{ "src": "api/**/*.js", "use": "@vercel/node" },
-		{ "src": "package.json", "use": "@vercel/static-build", "config": { "distDir": "public" } }
-	],
-	"routes": [
-		{ "src": "/api/(.*)", "dest": "/api/$1" },
-		{ "src": "/", "dest": "/auth_page.html" }
-	]
+  "version": 2,
+  "builds": [
+    { "src": "api/*.js", "use": "@vercel/node" },
+    { "src": "public/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/public/index.html" },
+    { "src": "/api/login", "dest": "/api/login.js" },
+    { "src": "/main_page.html", "dest": "/api/protected.js?p=main_page.html" },
+    { "src": "/reports_menu.html", "dest": "/api/protected.js?p=reports_menu.html" },
+    { "src": "/warehouse_menu.html", "dest": "/api/protected.js?p=warehouse_menu.html" },
+    { "src": "/public/main_page.html", "dest": "/api/protected.js?p=main_page.html" },
+    { "src": "/public/reports_menu.html", "dest": "/api/protected.js?p=reports_menu.html" },
+    { "src": "/public/warehouse_menu.html", "dest": "/api/protected.js?p=warehouse_menu.html" },
+    { "src": "/(.*)", "dest": "/public/$1" }
+  ]
 }
 

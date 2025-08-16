@@ -41,20 +41,21 @@ check_auth_data.addEventListener("click", async function(e) {
     check_auth_data.disabled = true;
     check_auth_data.textContent = "Проверка...";
     try {
-        // Клиентская проверка по статическому users.json (демо-режим)
-        const usersResp = await fetch('./users.json', { cache: 'no-store' });
-        if (!usersResp.ok) throw new Error('users.json not found');
-        const users = await usersResp.json();
-        const found = (users || []).find(u => u.login === auth_login.value && u.password === auth_password.value);
-        if (found) {
-            // Установим простую сессию (демо)
-            try { document.cookie = `session=${btoa(`${auth_login.value}:${auth_password.value}`)}; Path=/; SameSite=Lax`; } catch (_e) {}
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ login: auth_login.value, password: auth_password.value })
+        });
+        if (response.ok) {
             window.location.href = 'main_page.html';
         } else {
-            auth_error.textContent = 'Неверный логин или пароль';
+            const data = await response.json();
+            auth_error.textContent = data.message || 'Ошибка авторизации';
             auth_error.style.opacity = 1;
             auth_error.style.animation = "shake 0.3s";
-            setTimeout(() => { auth_error.style.animation = ""; }, 350);
+            setTimeout(() => {
+                auth_error.style.animation = "";
+            }, 350);
         }
     } catch (err) {
         auth_error.textContent = 'Ошибка соединения с сервером';

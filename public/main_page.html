@@ -23,14 +23,6 @@
     </style>
 </head>
 <body>
-<script>
-    (function(){
-        try {
-            var hasSession = (document.cookie || '').indexOf('session=') !== -1;
-            if (!hasSession) { window.location.replace('auth_page.html'); }
-        } catch(_) {}
-    })();
-</script>
     <header id="header" style="position: relative;">
         <button id="refresh_page_btn" title="Обновить страницу" style="position: absolute; left: 25px; top: 35px; width: 44px; height: 44px; border-radius: 50%; background: #2563eb; border: none; box-shadow: 0 2px 8px rgba(37,99,235,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: background 0.2s;">
             <i class="fa fa-rotate-right" style="color: #fff; font-size: 1.5rem;"></i>

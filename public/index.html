@@ -1,20 +1,93 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Авторизация</title>
-	<meta http-equiv="refresh" content="0; url=./auth_page.html" />
-	<script>
-		(function(){
-			try { window.location.replace('./auth_page.html'); } catch(_) {
-				window.location.href = './auth_page.html';
-			}
-		})();
-	</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-image: radial-gradient(rgb(195, 195, 253), rgb(135, 139, 253));
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .content {
+            margin: 0 auto;
+            height: 80vh;
+            width: 80vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+            font-weight: bold;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            text-shadow: white -2px -2px 0px,
+                         white 2px -2px 0px, 
+                         white -2px 2px 0px,
+                         white 2px 2px 0px;
+            color: white;
+            animation: slideUp 1s ease-out 0.5s both;
+            text-align: center;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .girl-image {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw; height: 60vh;
+            display: flex;
+            justify-content: center;
+            z-index: -9999;
+            animation: fadeInScale 2s ease-in-out both; /* Отдельная анимация для картинки */
+        }
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        a {
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        a:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+    </style>
 </head>
 <body>
-	<a href="./auth_page.html">Переход на страницу авторизации…</a>
+    <div class="content">
+        <a href="auth_page.html">
+            Перейти на страницу входа
+        </a>
+    </div>
+    <div class="girl-image">
+        <img src="./images/girl_index.png" alt="Добро пожаловать" 
+             style="width: 300px; height: 80%; filter: drop-shadow(0 0 15px blue);">
+    </div>
+    <script>
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.userSelect = 'none';
+            document.body.style.webkitUserSelect = 'none';
+            document.body.style.msUserSelect = 'none';
+            document.body.style.mozUserSelect = 'none';
+            
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+        });
+        </script>
 </body>
 </html>
-
