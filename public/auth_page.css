@@ -179,7 +179,6 @@ footer {
     gap: 10px;
 }
 
-/* Анимация появления формы */
 @keyframes fadeInUp {
     0% {
         opacity: 0;
@@ -191,7 +190,6 @@ footer {
     }
 }
 
-/* Плавающие label */
 .floating_input {
     padding-top: 18px;
     padding-bottom: 6px;
@@ -219,7 +217,6 @@ footer {
     padding: 0 4px;
 }
 
-/* Стили для ошибки */
 .auth_error {
     color: #ef4444;
     font-size: 0.98rem;
@@ -229,7 +226,6 @@ footer {
     transition: opacity 0.2s;
 }
 
-/* Интерактивная иконка показа пароля */
 #show_hide_password_button {
     display: flex;
     align-items: center;
@@ -241,7 +237,6 @@ footer {
     opacity: 1;
 }
 
-/* Декоративные силуэты */
 .decorative-silhouette {
     position: fixed;
     top: 50%;
@@ -259,21 +254,21 @@ footer {
 .decorative-right {
     right: 8%;
     animation: floatRight 6s ease-in-out infinite;
-    top: 50%; /* Явно указываем позицию */
-    transform: translateY(-50%); /* Центрируем по вертикали */
+    top: 50%; 
+    transform: translateY(-50%); 
 }
 
 .silhouette-image {
-    width: 400px; /* Увеличил с 300px до 400px */
+    width: 400px; 
     height: auto;
     filter: brightness(0) invert(1);
     opacity: 0.85;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Специальный размер для мужского силуэта */
+
 .decorative-right .silhouette-image {
-    width: 320px; /* Мужчина меньше девушки */
+    width: 320px; 
 }
 
 .decorative-silhouette:hover .silhouette-image {
@@ -281,7 +276,6 @@ footer {
     transform: scale(1.05);
 }
 
-/* Анимации плавания */
 @keyframes floatLeft {
     0%, 100% {
         transform: translateY(-50%) translateX(0px);
@@ -300,61 +294,43 @@ footer {
     }
 }
 
-/* Адаптивность для декоративных элементов */
-@media (max-width: 1200px) {
+@media (min-width: 1280px) and (max-width: 1440px) {
     .decorative-left {
-        left: 5%;
+        left: 4%;
     }
     .decorative-right {
         right: 5%;
     }
     .silhouette-image {
-        width: 350px; /* Увеличил с 250px до 350px */
+        width: 350px; 
     }
     .decorative-right .silhouette-image {
-        width: 280px; /* Мужчина меньше девушки */
+        width: 280px; 
     }
 }
 
-@media (max-width: 900px) {
-    .decorative-left {
-        left: 3%;
-    }
-    .decorative-right {
-        right: 3%;
-    }
-    .silhouette-image {
-        width: 300px; /* Увеличил с 220px до 300px */
-        opacity: 0.7;
-    }
-    .decorative-right .silhouette-image {
-        width: 240px; /* Мужчина меньше девушки */
-    }
-}
-
-@media (max-width: 700px) {
+@media (min-width: 1024px) and (max-width: 1279px) {
     .decorative-left {
         left: 2%;
     }
     .decorative-right {
-        right: 2%;
+        right: 5%;
     }
     .silhouette-image {
-        width: 250px; /* Увеличил с 180px до 250px */
-        opacity: 0.6;
+        width: 350px;
+        width: 250px; 
     }
     .decorative-right .silhouette-image {
-        width: 200px; /* Мужчина меньше девушки */
+        width: 200px; 
     }
 }
 
-@media (max-width: 500px) {
-    .decorative-silhouette {
-        display: none; /* Скрываем на очень маленьких экранах */
+@media (max-width: 1023px) {
+    .silhouette-image {
+        display: none;
     }
 }
 
-/* Адаптивность */
 @media (max-width: 600px) {
     header {
         font-size: 1.8rem;
@@ -395,6 +371,10 @@ footer {
     #auth_container {
         gap: 8px;
     }
+    .input_inner {
+        width: 95%;
+        margin: 0 auto;
+    }
 }
 
 @media (max-width: 350px) {
@@ -412,5 +392,9 @@ footer {
     }
     #auth_container {
         gap: 4px;
+    }
+    .input_inner {
+        width: 90%;
+        margin: 0 auto;
     }
 }
